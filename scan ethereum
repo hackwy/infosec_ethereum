@@ -1,1 +1,18 @@
 
+import web3
+
+# Creamos una instancia de la clase Web3 para conectarnos a un nodo de la red de Ethereum
+web3 = Web3(Web3.HTTPProvider("https://mainnet.infura.io/v3/API_KEY"))
+
+# Obtenemos el último bloque de la red de Ethereum
+block = web3.eth.getBlock("latest")
+
+# Recorremos todas las transacciones del bloque
+for tx in block["transactions"]:
+    # Obtenemos los detalles de la transacción
+    tx_details = web3.eth.getTransaction(tx)
+
+    # Verificamos si la transacción ejecuta un smart contract
+    if tx_details["to"] is not None:
+        # Obtenemos el código del smart contract
+        contract_code = web
